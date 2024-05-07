@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class JieSuoPanel : UIBase
     public string answerNum;
     private Button closeBtn;
     private string myAnswer;
+
+    public GameObject wrongTip;
     List<InputField> inputFields = new List<InputField>();
     // Start is called before the first frame update
     void Start()
@@ -54,6 +57,15 @@ public class JieSuoPanel : UIBase
             transform.parent.Find("BaseBookBtn/XingBtn").gameObject.SetActive(true);
             transform.parent.Find("Base/Lock").gameObject.SetActive(false);
             transform.parent.Find("Base/UnLock").gameObject.SetActive(true);
+        }
+        else
+        {
+            if (myAnswer.Length == 4)
+            {
+                wrongTip.gameObject.SetActive(true);
+                DOVirtual.DelayedCall(1, () => { wrongTip.gameObject.SetActive(false); });
+            }
+
         }
     }
 }

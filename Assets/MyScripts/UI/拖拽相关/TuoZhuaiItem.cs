@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 public class TuoZhuaiItem : MonoBehaviour,IDragHandler,IEndDragHandler,IBeginDragHandler
 {
     public Transform topTrans;
@@ -11,6 +12,17 @@ public class TuoZhuaiItem : MonoBehaviour,IDragHandler,IEndDragHandler,IBeginDra
     {
         transform.GetComponent<Image>().raycastTarget = false;
         transform.SetParent(topTrans);
+        DOVirtual.DelayedCall(0.05f, () =>
+        {
+            GameObject go = eventData.pointerCurrentRaycast.gameObject;
+            Debug.Log(go.name);
+            if (go.name.Contains("Slot"))
+            {
+                //transform.position = go.transform.position;
+                go.GetComponent<TuoZhuaiSlot>().SetMyItem("");
+            }
+        });
+
     }
 
     public void OnDrag(PointerEventData eventData)

@@ -9,6 +9,7 @@ public class Level3JieSuoPanel : UIBase
     public string answerNum;
     private Button closeBtn;
     private string myAnswer;
+    public GameObject wrongTip;
     List<InputField> inputFields = new List<InputField>();
 
     public Transform targetIMGList;
@@ -67,6 +68,15 @@ public class Level3JieSuoPanel : UIBase
             DOVirtual.DelayedCall(7f, () => {
                 nextObj.gameObject.SetActive(true);
             });
+        }
+        else
+        {
+            if(myAnswer.Length == 4)
+            {
+                wrongTip.gameObject.SetActive(true);
+                DOVirtual.DelayedCall(1, () => { wrongTip.gameObject.SetActive(false); });
+            }
+          
         }
     }
 }

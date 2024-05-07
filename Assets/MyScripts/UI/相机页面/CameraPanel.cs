@@ -12,6 +12,7 @@ public class CameraPanel : MonoBehaviour
     public Image write;
     public GameObject closeObj;
     public GameObject nectObj;
+    public GameObject wrongTip;
     void Start()
     {
         targetScale = targetTrans.localScale;
@@ -35,10 +36,12 @@ public class CameraPanel : MonoBehaviour
 
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        bool isHigh = false;
         foreach (RaycastResult result in results)
         {
             if(result.gameObject.name == "High")
             {
+                isHigh = true;
                 AudioManager.instance.PlayEffectAudio("Photo");
                 write.color = new Color(1, 1, 1, 0);
                 write.DOFade(1, 0.05f).SetEase(Ease.OutQuart).OnComplete(()=> {
@@ -53,6 +56,11 @@ public class CameraPanel : MonoBehaviour
                      });
                 });
             }
+        }
+        if (!isHigh)
+        {
+            wrongTip.gameObject.SetActive(true);
+            DOVirtual.DelayedCall(1, () => { wrongTip.gameObject.SetActive(false); });
         }
     }
 }

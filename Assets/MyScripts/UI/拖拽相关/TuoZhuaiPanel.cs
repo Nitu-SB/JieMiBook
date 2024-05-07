@@ -9,6 +9,8 @@ public class TuoZhuaiPanel : MonoBehaviour
     public Transform rightImageTrans;
 
     public GameObject nextObj;
+
+    public GameObject wrongTip;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,19 +30,26 @@ public class TuoZhuaiPanel : MonoBehaviour
             if(child.GetComponent<TuoZhuaiSlot>().myItem == "")
             {
                 isCorrect = false;
-                break;
+
+                return;
             }
             if(child.name.Substring(child.name.Length-1,1)!= child.GetComponent<TuoZhuaiSlot>().myItem.Substring(child.GetComponent<TuoZhuaiSlot>().myItem.Length - 1, 1))
             {
                 isCorrect = false;
-                break;
+                //break;
             }
         }
+
         if (isCorrect)
         {
             //继续
             Debug.Log("拖拽提正确");
             ShowImage();
+        }
+        else
+        {
+            wrongTip.gameObject.SetActive(true);
+            DOVirtual.DelayedCall(1, () => { wrongTip.gameObject.SetActive(false); });
         }
     }
     public void ShowImage()
