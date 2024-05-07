@@ -14,19 +14,24 @@ public class LogPanel : UIBase
         testParent = transform.Find("Bg/TextList");
         foreach (Transform child in testParent)
         {
-            textList.Add(child.GetComponent<Text>().text);
-            child.GetComponent<Text>().text = "";
+            if(child.GetComponent<Text>()!= null)
+            {
+                textList.Add(child.GetComponent<Text>().text);
+                child.GetComponent<Text>().text = "";
+            }
+           
         }
         OpenUIPanel();
     }
     public override void OpenUIPanel()
     {
-        transform.GetChild(0).localScale = Vector3.zero;
+        transform.GetChild(0).GetChild(0).localScale = Vector3.zero;
         transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, 0);
         transform.GetChild(0).gameObject.SetActive(true);
         AudioManager.instance.PlayEffectAudio("Pop");
-        transform.GetChild(0).DOScale(1, 0.2f).SetEase(Ease.OutQuart).OnComplete(() => {
-            transform.GetChild(0).GetComponent<Image>().DOFade(0.5f, 1);
+        transform.GetChild(0).GetComponent<Image>().DOFade(0.5f, 0);
+        transform.GetChild(0).GetChild(0).DOScale(1, 0.2f).SetEase(Ease.OutQuart).OnComplete(() => {
+            
         });
         StartCoroutine(ShowTextList());
     }
