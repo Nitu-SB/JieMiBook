@@ -8,7 +8,7 @@ public class MyVideo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DOVirtual.DelayedCall(18.5f, () => {
+        DOVirtual.DelayedCall(34f, () => {
             closeObj.gameObject.SetActive(false);
             nextObj.gameObject.SetActive(true);
             AudioManager.instance.BGM.Play();

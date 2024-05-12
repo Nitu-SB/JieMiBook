@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class StartAnim : MonoBehaviour
 {
     public bool isMainScene = false;
@@ -10,11 +13,21 @@ public class StartAnim : MonoBehaviour
     public Transform book;
     public Transform cat;
     public GameObject title;
+    public Button backBtn;
+    
     void Start()
     {
         //transform.localScale = Vector3.one * 1.749101f;
         //GetComponent<RectTransform>().offsetMax = new Vector2(0, 396);
         //GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -396);
+
+        if (backBtn != null)
+        {
+            backBtn.onClick.AddListener(() => {
+                SceneManager.LoadScene(0);
+            });
+        }
+            
         if (!isMainScene)
         {
             RectTransform rectCat = cat.GetComponent<RectTransform>();

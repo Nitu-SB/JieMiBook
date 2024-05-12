@@ -14,11 +14,17 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
         }
+
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        DontDestroyOnLoad(this.gameObject);
     }
 
     // Update is called once per frame
@@ -48,6 +54,7 @@ public class AudioManager : MonoBehaviour
 
         if (isLong)
         {
+            Effect.loop = true;
             Effect.clip = clip;
             Effect.Play();
         }

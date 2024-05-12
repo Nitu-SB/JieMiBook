@@ -191,10 +191,13 @@ public class EraseHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
             //触发结束事件
             DOVirtual.DelayedCall(0.5f, () => {
                 img.GetComponent<Animator>().enabled = true;
+                AudioManager.instance.PlayEffectAudio("Walk", true);
                 DOVirtual.DelayedCall(8, () => {
+                    AudioManager.instance.Effect.Stop();
                     AudioManager.instance.BGM.Stop();
                     nectObj.gameObject.SetActive(true);
                     closeObj.gameObject.SetActive(false);
+                    
                 });
                 
             });

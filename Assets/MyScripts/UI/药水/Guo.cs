@@ -33,7 +33,7 @@ public class Guo : MonoBehaviour
 
             Debug.Log("´íÎóµÄÒ©Ë®Ë³Ðò");
             
-            AudioManager.instance.PlayEffectAudio("Wrong");
+            
             wrongTip.gameObject.SetActive(true);
             DOVirtual.DelayedCall(2, () => {
                 wrongTip.gameObject.SetActive(false);
