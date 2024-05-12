@@ -4,6 +4,7 @@ using UnityEngine;
 public class YaoShuiPanel : MonoBehaviour
 {
     public GameObject nextObj;
+    bool canNext = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +14,13 @@ public class YaoShuiPanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (canNext)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                nextObj.gameObject.SetActive(true);
+            }
+        }
     }
     public void ReSetPanel()
     {
@@ -25,6 +32,6 @@ public class YaoShuiPanel : MonoBehaviour
     }
     public void NextPage()
     {
-        nextObj.gameObject.SetActive(true);
+        canNext = true;
     }
 }

@@ -22,6 +22,7 @@ public class LogPanel : UIBase
            
         }
         OpenUIPanel();
+        transform.Find("Bg/CloseBtn").GetComponent<Button>().onClick.AddListener(() => { CloseUIPanel(); });
     }
     public override void OpenUIPanel()
     {
@@ -53,7 +54,8 @@ public class LogPanel : UIBase
             yield return new WaitForSeconds(textList[i].Length / 20f);
         }
         AudioManager.instance.StopEffectAudio();
-        yield return new WaitForSeconds(4f);
-        CloseUIPanel();
+        transform.Find("Bg/CloseBtn").gameObject.SetActive(true);
+        //yield return new WaitForSeconds(4f);
+        //CloseUIPanel();
     }
 }

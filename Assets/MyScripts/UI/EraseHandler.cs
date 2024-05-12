@@ -194,14 +194,26 @@ public class EraseHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
                 AudioManager.instance.PlayEffectAudio("Walk", true);
                 DOVirtual.DelayedCall(8, () => {
                     AudioManager.instance.Effect.Stop();
-                    AudioManager.instance.BGM.Stop();
-                    nectObj.gameObject.SetActive(true);
-                    closeObj.gameObject.SetActive(false);
-                    
+                    //AudioManager.instance.BGM.Stop();
+                    //nectObj.gameObject.SetActive(true);
+                    //closeObj.gameObject.SetActive(false);
+                    canNext = true;
                 });
                 
             });
         }
     }
-
+    bool canNext = false;
+    private void Update()
+    {
+        if (canNext)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                AudioManager.instance.BGM.Stop();
+                nectObj.gameObject.SetActive(true);
+                closeObj.gameObject.SetActive(false);
+            }
+        }
+    }
 }

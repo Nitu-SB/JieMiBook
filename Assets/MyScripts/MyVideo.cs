@@ -9,15 +9,21 @@ public class MyVideo : MonoBehaviour
     void Start()
     {
         DOVirtual.DelayedCall(34f, () => {
-            closeObj.gameObject.SetActive(false);
-            nextObj.gameObject.SetActive(true);
-            AudioManager.instance.BGM.Play();
+            canNext = true;
         });
     }
-
+    bool canNext = false;
     // Update is called once per frame
     void Update()
     {
-        
+        if (canNext)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                closeObj.gameObject.SetActive(false);
+                nextObj.gameObject.SetActive(true);
+                AudioManager.instance.BGM.Play();
+            }
+        }
     }
 }

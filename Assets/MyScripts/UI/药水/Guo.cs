@@ -33,7 +33,6 @@ public class Guo : MonoBehaviour
 
             Debug.Log("´íÎóµÄÒ©Ë®Ë³Ðò");
             
-            
             wrongTip.gameObject.SetActive(true);
             DOVirtual.DelayedCall(2, () => {
                 wrongTip.gameObject.SetActive(false);

@@ -11,6 +11,7 @@ public class TuoZhuaiPanel : MonoBehaviour
     public GameObject nextObj;
 
     public GameObject wrongTip;
+    bool canNext = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,13 @@ public class TuoZhuaiPanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (canNext)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                nextObj.gameObject.SetActive(true);
+            }
+        }
     }
     public void Check()
     {
@@ -69,8 +76,9 @@ public class TuoZhuaiPanel : MonoBehaviour
                 img2.DOFade(0, 1.5f);
                 img2_c.DOFade(1, 1.5f);
 
-                DOVirtual.DelayedCall(2, () => {
-                    nextObj.gameObject.SetActive(true);
+                DOVirtual.DelayedCall(1.5f, () => {
+                    canNext = true;
+                    //nextObj.gameObject.SetActive(true);
                 });
             });
         });

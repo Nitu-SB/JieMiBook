@@ -14,6 +14,7 @@ public class BookUnlock : MonoBehaviour
     {
         
     }
+    bool canNext = false;
     private void OnEnable()
     {
         leftPage.transform.localPosition = Vector3.zero;
@@ -30,11 +31,11 @@ public class BookUnlock : MonoBehaviour
                         text3.DOText("2000.3.5", 0.5f).SetEase(Ease.Linear).OnComplete(() =>
                         {
                             AudioManager.instance.StopEffectAudio();
-                            DOVirtual.DelayedCall(2, () => {
-                                nextObj.gameObject.SetActive(true);
-                            });
-                           
-                            
+                            canNext = true;
+                            //DOVirtual.DelayedCall(2, () =>
+                            //{
+                            //    nextObj.gameObject.SetActive(true);
+                            //});
                         });
                     });
                 });
@@ -44,6 +45,12 @@ public class BookUnlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (canNext)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                nextObj.gameObject.SetActive(true);
+            }
+        }
     }
 }

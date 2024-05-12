@@ -17,7 +17,7 @@ public class CameraPanel : MonoBehaviour
     {
         targetScale = targetTrans.localScale;
     }
-
+    bool canNext = false;
     // Update is called once per frame
     void Update()
     {
@@ -27,6 +27,16 @@ public class CameraPanel : MonoBehaviour
         x = Mathf.Clamp(x, 0.5523f, 1.22f);
         targetScale = Vector3.one * x;
         targetTrans.transform.localScale = Vector3.Lerp(targetTrans.transform.localScale, targetScale, 4*Time.deltaTime);
+
+        if (canNext)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                this.gameObject.SetActive(false);
+                closeObj.gameObject.SetActive(false);
+                nectObj.gameObject.SetActive(true);
+            }
+        }
     }
 
     public void Check()
@@ -46,11 +56,12 @@ public class CameraPanel : MonoBehaviour
                 write.color = new Color(1, 1, 1, 0);
                 write.DOFade(1, 0.05f).SetEase(Ease.OutQuart).OnComplete(()=> {
                     write.DOFade(0, 0.3f).SetEase(Ease.OutQuart).OnComplete(() => {
-                        DOVirtual.DelayedCall(1.5f, () =>
+                        DOVirtual.DelayedCall(0.5f, () =>
                         {
-                            this.gameObject.SetActive(false);
-                            closeObj.gameObject.SetActive(false);
-                            nectObj.gameObject.SetActive(true);
+                            canNext = true;
+                            //this.gameObject.SetActive(false);
+                            //closeObj.gameObject.SetActive(false);
+                            //nectObj.gameObject.SetActive(true);
                             
                         });
                      });

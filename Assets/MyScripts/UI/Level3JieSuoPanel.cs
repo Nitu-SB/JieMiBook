@@ -15,6 +15,8 @@ public class Level3JieSuoPanel : UIBase
     public Transform targetIMGList;
 
     public GameObject nextObj;
+
+    bool canNext = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +38,13 @@ public class Level3JieSuoPanel : UIBase
     // Update is called once per frame
     void Update()
     {
-
+        if (canNext)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                nextObj.gameObject.SetActive(true);
+            }
+        }
     }
     public override void OpenUIPanel()
     {
@@ -65,8 +73,8 @@ public class Level3JieSuoPanel : UIBase
                 child.GetComponent<Image>().DOFade(0, 2f);
             }
 
-            DOVirtual.DelayedCall(7f, () => {
-                nextObj.gameObject.SetActive(true);
+            DOVirtual.DelayedCall(2f, () => {
+                canNext = true;
             });
         }
         else
